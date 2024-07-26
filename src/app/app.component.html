@@ -1,0 +1,110 @@
+<div class="card">
+    <h5 class="card-header card-header-color">
+        User Registration
+    </h5>
+    <div class="card-body">
+        <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+            <div class="row mb-3">
+                <div class="form-group col">
+                    <label>Title</label>
+                    <select class="form-control" formControlName="title"
+                        [ngClass]="{'is-invalid' : submitted && f['title'].errors}">
+                        <option value="Mr">Mr</option>
+                        <option value="Mrs">Mrs</option>
+                        <option value="Miss">Miss</option>
+                        <option value="Ms">Mr</option>
+                    </select>
+                    <div *ngIf="submitted && f['title'].errors" class="invalid-feedback">
+                        <div *ngIf="f['title'].errors['required']">title is required !</div>
+                    </div>
+                </div>
+                <div class="form-group col-5" formControlName="firstName">
+                    <label>First Name</label>
+                    <input type="text" class="form-control" formControlName="firstName"
+                        [ngClass]="{'is-invalid' : submitted && f['firstName'].errors}" />
+                    <div *ngIf="submitted && f['firstName'].errors" class="invalid-feedback">
+                        <div *ngIf="f['firstName'].errors['required']">first Name is required !! </div>
+                        <div *ngIf="f['firstName'].errors['minlength']">First Name should be atleast 3 char long !!
+                        </div>
+                        <div *ngIf="f['firstName'].errors['maxlength']">First Name Should not be more than 10 char long
+                            !!</div>
+                    </div>
+                </div>
+                <div class="form-group col-5" [ngClass]="{'is-invalid' : submitted && f['lastName'].errors}">
+                    <label>Last Name</label>
+                    <input type="text" class="form-control" formControlName="lastName" />
+                    <div *ngIf="submitted && f['lastName'].errors" class="invalid-feedback">
+                        <div *ngIf="f['lastName'].errors['required']">title is required !</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="form-group col-5">
+                    <label>Date of birth</label>
+                    <input type="date" class="form-control" formControlName="dob" />
+                </div>
+                <div class="form-group col-5">
+                    <label>Email</label>
+                    <input type="text" class="form-control" formControlName="email" />
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="form-group col-5">
+                    <label>Password</label>
+                    <input type="text" class="form-control" formControlName="password" />
+                </div>
+                <div class="form-group col-5">
+                    <label>Confirm Password</label>
+                    <input type="text" class="form-control" formControlName="confirmPassword" />
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="form-group col form-check">
+                    <input type="checkbox" id="acceptTerms" class="form-check-input" formControlName="acceptTerms" />
+                    <label for="acceptTerms" class="form-check-label">Accept terms & conditions</label>
+                </div>
+            </div>
+
+            <div class="col" class="text-center">
+                <button type="submit" class="btn btn-success me-1">{{buttonText}}</button>
+                <button type="button" class="btn btn-danger" (click)="onCancel()">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="card">
+    <h5 class="card-header card-header-list-color">
+        User List
+    </h5>
+    <div class="card-body">
+        <div class="form-row">
+            <div class="form-group col">
+                <table class="table table-striped">
+                    <tr>
+                        <th>Title</th>
+                        <th>First Name</th>
+                        <th>Latst Name</th>
+                        <th>Date of Birth</th>
+                        <th>Email</th>
+                        <th>Actions</th>
+                    </tr>
+                    <tr *ngFor="let user of users">
+                        <td>{{user.title}}</td>
+                        <td>{{user.firstName}}</td>
+                        <td>{{user.lastName}}</td>
+                        <td>{{user.dob}}</td>
+                        <td>{{user.email}}</td>
+                        <td>
+                            <i class="fa fa-edit" style="color: green" (click)="Edit(user.id)"></i>
+                            <i class="fa fa-trash" style="color: green" (click)="Delete(user.id)"></i>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

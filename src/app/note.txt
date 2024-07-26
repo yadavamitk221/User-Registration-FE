@@ -1,0 +1,29 @@
+ // this._toastr.success("saved Success", "user Master")
+    // this._toastr.info("Info Success", "user Master")
+    // this._toastr.warning("warnings", "user Master")
+    // this._toastr.error("error", "user Master");
+
+
+
+        Swal.fire({
+      title: 'Are you Sure?',
+      text: "You will not be able to recover this record!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes, delete it!", 
+      cancelButtonText: "No, keep it!",
+    }).then(result => {
+      if(result.value) {
+        Swal.fire(
+          'Deleted!', 
+          'You record deleted Successfully',
+          'success'
+        )
+      }else if(result.dismiss === Swal.DismissReason.cancel){
+        Swal.fire(
+          'Cancelled',
+          'You record is safe :) ', 
+          'error'
+        )
+      }
+    })
